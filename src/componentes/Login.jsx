@@ -33,8 +33,10 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-96">
+    <div className="flex items-center justify-center h-screen bg-gray-100"
+    style={{ backgroundImage: "url('https://media.gq.com.mx/photos/62a8ab503e77ab160cfb84f3/master/w_1600%2Cc_limit/kapital_soho-14.jpg')" }}
+    >
+      <div className="bg-white p-8 rounded-lg shadow-lg w-96 h-98">
         <h2 className="text-2xl font-bold text-gray-800 mb-4">Iniciar Sesión</h2>
         {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
         <form onSubmit={handleLogin}>
