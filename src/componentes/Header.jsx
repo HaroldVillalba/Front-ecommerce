@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
   const [usuario, setUsuario] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Verificar usuario al cambiar de ruta
   useEffect(() => {
     const usuarioGuardado = localStorage.getItem("usuario");
     if (usuarioGuardado) {
@@ -16,7 +15,7 @@ const Header = () => {
     } else {
       setUsuario(null);
     }
-  }, [location.pathname]); // Se ejecuta cada vez que cambia la ruta
+  }, [location.pathname]);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -26,26 +25,31 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-blue-300 text-gray-800 py-6">
-      <nav className="container mx-auto flex justify-between items-center">
-        <h1 className="text-lg font-bold">Aleluya</h1>
-        <div className="flex space-x-4 items-center">
+    <header className="bg-gradient-to-r from-blue-400 to-blue-600 text-white py-4 shadow-md">
+      <nav className="container mx-auto px-4 flex justify-between items-center">
+        <Link to="/" className="text-2xl font-bold hover:text-blue-100 transition duration-300">
+          Aleluya
+        </Link>
+        <div className="flex items-center space-x-4">
           {location.pathname === "/productos" && usuario ? (
-            // Mostrar solo en /productos
             <>
-              <div className="flex items-center space-x-2">
-                <FontAwesomeIcon icon={faUser} className="text-gray-800" />
-                <span className="text-gray-600">{usuario.nombre}</span>
+              <div className="flex items-center space-x-2 bg-blue-700 py-2 px-4 rounded-full">
+                <FontAwesomeIcon icon={faUser} className="text-blue-200" />
+                <span className="text-blue-100">{usuario.nombre}</span>
               </div>
               <button
                 onClick={handleLogout}
-                className="text-red-500 hover:text-red-300 ml-4"
+                className="flex items-center space-x-2 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-full transition duration-300"
               >
-                Cerrar Sesión
+                <FontAwesomeIcon icon={faSignOutAlt} />
+                <span>Cerrar Sesión</span>
               </button>
             </>
           ) : (
-            <Link to="/login" className="hover:text-gray-800">
+            <Link 
+              to="/login" 
+              className="bg-white text-blue-600 hover:bg-blue-100 py-2 px-4 rounded-full transition duration-300"
+            >
               Iniciar Sesión
             </Link>
           )}
@@ -56,3 +60,4 @@ const Header = () => {
 };
 
 export default Header;
+
