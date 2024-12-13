@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import apiClient from "../api/axiosConfig";
 
 const Productos = () => {
-  const [productos, setProductos] = useState([]);
+  const [Recipes, setRecipes] = useState([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchProductos = async () => {
       try {
         const response = await apiClient.get("/recipes");
-        setProductos(response.data);
+        setRecipes(response.data);
       } catch (err) {
         setError("Error al cargar los productos");
       }
@@ -25,13 +25,13 @@ const Productos = () => {
   </div>
   {error && <p className="text-red-500">{error}</p>}
   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-    {productos.map((producto) => (
+    {Recipes.map((Recipe) => (
       <div
-        key={producto.id}
+        key={Recipe.id}
         className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition"
       >
-        <h2 className="text-lg font-semibold">{producto.nombre}</h2>
-        <p className="text-gray-600">Precio: ${producto.precio}</p>
+        <h2 className="text-lg font-semibold">{Recipe.nombre}</h2>
+        <p className="text-gray-600">Precio: ${Recipe.precio}</p>
       </div>
     ))}
   </div>
