@@ -8,7 +8,7 @@ const Productos = () => {
   useEffect(() => {
     const fetchProductos = async () => {
       try {
-        const response = await apiClient.get("/productos");
+        const response = await apiClient.get("/recipes");
         setProductos(response.data);
       } catch (err) {
         setError("Error al cargar los productos");
