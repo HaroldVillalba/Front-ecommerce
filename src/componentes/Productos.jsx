@@ -30,8 +30,10 @@ const Productos = () => {
         key={Recipe.id}
         className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition"
       >
-        <h2 className="text-lg font-semibold">{Recipe.nombre}</h2>
-        <p className="text-gray-600">Precio: ${Recipe.precio}</p>
+        <h2 className="text-lg font-semibold">{Recipe.title}</h2>
+        <p className="text-gray-600">Categoria: ${Recipe.category}</p>
+        <p className="text-gray-600">Ingredientes: ${Recipe.ingredients}</p>
+        <p className="text-gray-600">Instrucciones: ${Recipe.intructions}</p>
       </div>
     ))}
   </div>

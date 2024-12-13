@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const Home = () => {
-  const [productos, setProductos] = React.useState([]);
+  const [recipes, setRecipes] = React.useState([]);
 
   useEffect(() => {
     const fetchProductos = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/categorias/');
-        setProductos(response.data);
+        const response = await axios.get('http://localhost:5000/api/recipes');
+        setRecipes(response.data);
       } catch (error) {
         console.error('Error al obtener los productos:', error);
       }
@@ -35,18 +35,24 @@ const Home = () => {
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-6">
-        {productos.map((producto) => (
+        {recipes.map((Recipe) => (
           <button
-          key={producto._id}
+          key={Recipe._id}
           onClick={() => {/* Agrega aquí la lógica de clic si es necesario */}}
           className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
         >
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            {producto.nombre}
+            {Recipe.title}
           </h5>
           <p className="font-normal text-gray-700 dark:text-gray-400">
-            {producto.descripcion}
+            {Recipe.category} 
           </p>
+          <p className="font-normal text-gray-700 dark:text-gray-400">
+            {Recipe.ingredients} 
+          </p>
+          <h5 className="font-normal text-gray-700 dark:text-gray-400">
+            {Recipe.intructions}
+          </h5>
           <small className="text-gray-500 dark:text-gray-400">
             Fecha de creación: {new Date(producto.fechaCreacion).toLocaleDateString()}
           </small>
